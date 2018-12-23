@@ -1,3 +1,7 @@
+<?php 
+require_once './inc/session.php';
+require_once './inc/db.php';
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,14 +11,29 @@
 </head>
 <body>
 
-  
-
 <div id="main">
 <div id="title">
 <div id="user">
+<?php 
+  if(is_login()) 
+    echo '当前用户: ' . current_user()->name;
+  else
+    echo "你还未登陆";
+?>
+<br>
 <a href="./users/new.php" class="fff">注册</a>
 <br>
 <a href="./sessions/new.php" class="fff">登陆</a>
+<br>
+<a href="./sessions/delete.php" class="fff">退出</a>
+<br>
+<a href="./cart/cart.php" class="fff">购物车</a>
+<br>
+<a href="./order/" class="fff">订单</a>
+<br>
+<a href="./order/histories" class="fff">历史订单</a>
+<br>
+<a href="./admin/" class="fff">管理后台</a>
 </div>
 
 <h1>XXXX</h1>
@@ -40,8 +59,6 @@
 </nav>
 </div>
 <?php 
-        require_once './inc/db.php';
-
         $query = $db->query('select * from details');
         while ( $post =  $query->fetchObject() ) {
       ?>

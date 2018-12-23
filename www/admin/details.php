@@ -36,8 +36,7 @@
     </form>
   <?php 
           require_once './inc/db.php';
-
-          $query = $db->query( 'select * from comments where post_id = ' . $_GET['id']);
+          $query = $db->query( 'select * from d_comments where post_id = ' . $_GET['id']);
           while ( $post =  $query->fetchObject() ) {
         ?>
         <ul>

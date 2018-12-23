@@ -11,6 +11,6 @@ $query->bindParam(':create_at',$_POST['create_at'],PDO::PARAM_STR);
 if (!$query->execute()) {	
 	print_r($query->errorInfo());
 }else{
-	redirect_to("/details.php?id=" . $_POST['post_id']);
+	redirect_to("../commodity/show.php?id=" . $_POST['post_id']);
 };
 ?>

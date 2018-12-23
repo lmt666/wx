@@ -34,6 +34,9 @@
 	<label for="data">data</label>
 	<textarea name="data"></textarea>
 	<br/>
+	<label for="stock">stock</label>
+	<input type="number" min="0" name="stock" value="0">
+	<br>
 	<input type="submit" value="提交" />
 </form>
 

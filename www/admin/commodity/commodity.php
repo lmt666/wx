@@ -23,22 +23,24 @@
       <?php  } ?>    
  <?php 
         require_once '../inc/db.php';
+        require_once '../inc/pager.php';
+       
          if($_GET['id']!='0')
-           $query = $db->query('select * from commodity where c_id =' . $_GET['id']);
+           $pager = new Pager('select * from commodity where c_id =' . $_GET['id'] );
         else
-          $query = $db->query('select * from commodity');
+          $pager = new Pager('select * from commodity');
+        $query = $pager->query(@$_GET['page']);
         while ( $post =  $query->fetchObject() ) {  
       ?>
         <tr>
           <td><a href="show.php?id=<?php echo $post->id ?>"><?php echo $post->title ?></a></td>       
-          <td><a href="edit.php?id=<?php print $post->id; ?>">改</a>
+          <td><a href="edit.php?id=<?php echo $post->id; ?>">改</a>
               <a href="delete.php?id=<?php echo $post->id ?>">删</a></td>
           <br>
         </tr>
-      <?php  } ?>    
-        
-        
+      <?php  } ?>            
 </table>
+<?php echo $pager->nav_html(); ?> 
 <a href="new.php?id=<?php echo $_GET['id'] ?>">新增</a>
 </body>
 </html>

@@ -7,13 +7,29 @@
 
 </head>
 <body>
+<?php 
+  require_once './inc/session.php';
+  require_once './inc/db.php';
+
+  if(!is_login()){
+      set_notice('必须登录后方可使用本功能');
+      redirect_to('../sessions/new.php');
+  }
+?>
 <div id="main">
 <div id="title">
+<div id="user">
+<?php echo '当前用户: ' . current_user()->name; ?>
+<br>
+  <a href="./order/" class="fff">订单</a>
+  <br>
+  <a href="../" class="fff">返回前台</a>
+</div>
 <h1>XXXX</h1>
 </div>
 
 <div id="search">
- 
+  
 	<form action="" method="get">
 	<input type="search"  >
 	<input type="submit" value="搜索" >
@@ -55,7 +71,6 @@
             <p><?php echo $post->jj; ?></p>
             <br>
             <div id="t">
-            <a href="./cart/cart-add.php?id=<?php print $post->id; ?>">加入购物车</a> 
             <a href="details.php?id=<?php print $post->id; ?>">详细信息</a> 
             <a href="edit.php?id=<?php print $post->id; ?>">改</a> 
             </div>

@@ -16,16 +16,21 @@
     <tbody>
  <?php 
         require_once '../inc/db.php';
-        
-        $query = $db->query('select * from commodity where c_id =' . $_GET['id']);
+        require_once '../inc/pager.php';
+        if($_GET['id']!='0')
+          $pager = new Pager('select * from commodity where c_id =' . $_GET['id'] );
+        else
+          $pager = new Pager('select * from commodity');
+        $query = $pager->query(@$_GET['page']);
         while ( $post =  $query->fetchObject() ) {  
       ?>
         <tr>
           <td><a href="commodity.php?id=<?php echo $post->id ?>"><?php echo $post->title ?></a></td>
-          <td><a href="../cart/cart_add.php?id=<?php echo $post->id ?>">加入购物车</a></td>
+          <td><a href="../cart/new.php?id=<?php echo $post->id ?>">加入购物车</a></td>
           <br>
         </tr>
       <?php  } ?>
 </table>
+<?php echo $pager->nav_html(); ?> 
 </body>
 </html>

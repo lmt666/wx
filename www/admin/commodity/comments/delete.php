@@ -2,18 +2,14 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>delete</title>
+  <title></title>
 </head>
 <body>	
 	<?php $id = $_GET['id']; ?>
-	<form action="./num/getnum.php" method="post">
+	<form action="destroy.php" method="post">
 		<input type="hidden" name="id" value = "<?php echo $id; ?>"/>
 		是否删除?
 		<input type="submit" value="确定">
-	</form>	
-	<form action="cart.php" method="post">
-		<input type="hidden" name="id" value = "<?php echo $id; ?>"/>
-		<input type="submit" value="取消">
 	</form>	
 </body>
 </html>

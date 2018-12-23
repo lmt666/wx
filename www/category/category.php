@@ -9,6 +9,9 @@
 	<h1>物品分类</h1>
    <div id="nav">
 <nav class="container">
+<ul>
+  <li><a href="show.php?id=0">全部</a></li>
+</ul
 	<?php 
         require_once '../inc/db.php';
         

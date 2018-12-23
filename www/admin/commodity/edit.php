@@ -33,6 +33,9 @@
 			<?php echo $post->data; ?>
 		</textarea>
 		<br>
+		<label for="stock">stock</label>
+		<input type="number" min="0" name="stock" value="<?php echo $post->stock ?>">
+		<br>
 		<input type="submit" value="提交" />
 	</form>
 </body>
