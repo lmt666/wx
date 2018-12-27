@@ -8,7 +8,9 @@
 	<?php 
 		require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
 		require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/common.php';
-		$query=$db->query('select * from adress');
+		require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/session.php';
+
+		$query=$db->query('select * from adress where user_id = ' . $_SESSION['userid']);
 		while($post=$query->fetchObject()){
 			?>
 			<ul>

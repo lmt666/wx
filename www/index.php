@@ -36,13 +36,7 @@ require_once './inc/db.php';
 
 <h1>XXXX</h1>
 </div>
-<div id="search">
 
-	<form action="" method="get">
-	<input type="search"  >
-	<input type="submit" value="搜索" >
-	</form>
-</div>
 
 <div id="nav">
 <nav>

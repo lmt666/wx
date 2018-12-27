@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head></head>
+<body>
 <?php 
 require_once '../inc/db.php';
 require_once '../inc/common.php';
@@ -29,3 +34,6 @@ if (!$query->execute()) {
 }
 
 ?>
+</body>
+</html>
+
