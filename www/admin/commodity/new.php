@@ -10,7 +10,7 @@
 <img src="./captcha.php" alt="">
 <form action="save.php" method="post" enctype="multipart/form-data">
 	<?php 
-        require_once '../inc/db.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
         
         $query = $db->query('select * from category');
 	    @$query->bindValue(':id',$_GET['id'],PDO::PARAM_INT);

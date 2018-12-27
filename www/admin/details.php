@@ -12,7 +12,7 @@
 </style>
 <body>
   <?php        
-    require_once './inc/db.php';    
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';    
 
     $query = $db->prepare('select * from details where id = :id');
     $query->bindValue(':id',$_GET['id'],PDO::PARAM_INT);
@@ -35,7 +35,7 @@
       <input type="submit" value="提交">
     </form>
   <?php 
-          require_once './inc/db.php';
+          require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
           $query = $db->query( 'select * from d_comments where post_id = ' . $_GET['id']);
           while ( $post =  $query->fetchObject() ) {
         ?>

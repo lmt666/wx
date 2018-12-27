@@ -15,15 +15,15 @@
     </thead>
     <tbody>
 <?php 
-        require_once '../inc/db.php';
-        $query = $db->query('select * from category where id = ' . $_GET['id']);
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+        $query = $db->query('select * from category where cid = ' . $_GET['id']);
         while ( $post =  $query->fetchObject() ) {  
       ?>
           <h2><?php echo $post->name ?></h2>
       <?php  } ?>    
  <?php 
-        require_once '../inc/db.php';
-        require_once '../inc/pager.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/pager.php';
        
          if($_GET['id']!='0')
            $pager = new Pager('select * from commodity where c_id =' . $_GET['id'] );
@@ -42,5 +42,9 @@
 </table>
 <?php echo $pager->nav_html(); ?> 
 <a href="new.php?id=<?php echo $_GET['id'] ?>">新增</a>
+<br>
+<a href="../category/">返回上一页</a>
+<br>
+<a href="../">返回首页</a>
 </body>
 </html>

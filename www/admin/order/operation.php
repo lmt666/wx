@@ -1,17 +1,23 @@
-<?php 
-require_once '../inc/common.php';
-require_once '../inc/db.php';
-$id=$_GET['id'];
-$status='已发货';
-$sql='update orders set status = :status where id = :id';
-$query=$db->prepare($sql);
-$query->bindValue('status',$status,PDO::PARAM_STR);
-$query->bindValue(':id',$id,PDO::PARAM_INT);
-$q=$db->prepare('inert into orders_ad_histories(user_name,name,price,num,total) values(:user_name,:name,:price,:num,:total');
-
-if (!$query->execute()) {	
-	print_r($query->errorInfo());
-}else{
-	redirect_to("./");
-};
- ?>
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head></head>
+<body>
+	<?php 
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/common.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+	require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/session.php';
+	$id=$_GET['id'];
+	$status="已发货";
+		$sql="update orders set status = :status where oid = :oid";
+		$query=$db->prepare($sql);	
+		$query->bindParam(':oid',$id,PDO::PARAM_INT);
+		$query->bindParam(':status',$status,PDO::PARAM_STR);
+	if(!$query->execute()){
+		print_r($query->errorInfo());
+	}else{
+		redirect_to("./");
+	};
+ 	?>
+</body>
+</html>

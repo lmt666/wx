@@ -10,9 +10,9 @@ $name = trim($_POST['name']);
 	}else{
 		$pwd = encrypt_password($_POST['password']); 
 
-		$sql = "insert into users(name,password) values(:name, :password);" ;	
+		$sql = "insert into users(nickname,password) values(:nickname, :password);" ;	
 		$query = $db->prepare($sql);
-		$query->bindParam(':name',$name,PDO::PARAM_STR);
+		$query->bindParam(':nickname',$name,PDO::PARAM_STR);
 		$query->bindParam(':password',$pwd,PDO::PARAM_STR);
 				
 		if (!$query->execute()) {	

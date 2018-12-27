@@ -27,16 +27,18 @@
         while ($post= $query->fetchObject() ) {         
       ?>
           <tr>
-            <td><?php echo $post->name; ?></td>
+            <td><?php echo $post->cname; ?></td>
             <td><?php echo $post->price; ?></td>
             <td><?php echo $post->num; ?></td>
             <td><?php echo $post->total; ?></td>    
             <td><?php echo $post->creat_at; ?></td>
             <td><?php echo $post->status ?></td>
-            <td><a href="operation.php?id=<?php echo $post->id?>">确认收货</a></td>
+            <td><a href="operation.php?id=<?php echo $post->oid?>">确认收货</a></td>
           </tr> 
       <?php } ?>
   </table>
+  <br>
+  <a href="../personalinformation.php">返回上一页</a>
   <br>
   <a href="../index.php">返回首页</a>
 </body>

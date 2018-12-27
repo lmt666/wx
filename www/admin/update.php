@@ -1,6 +1,6 @@
 <?php 
-require_once './inc/db.php';
-require_once './inc/common.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/common.php';
 $id = $_POST['id'];
 $sql = "update details set title = :title, jj = :jj, body = :body, price = :price, data = :data where id = :id;" ;	
 $query = $db->prepare($sql);

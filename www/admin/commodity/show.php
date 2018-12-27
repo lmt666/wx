@@ -6,40 +6,32 @@
 </head>
 <body>
   <?php        
-    require_once '../inc/db.php';    
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';    
     
-    $query = $db->prepare('select * from commodity join category on c_id=category.id where commodity.id = :id');
-    $query->bindValue(':id',$_GET['id'],PDO::PARAM_INT);
-    $query->execute();
-    $post = $query->fetchObject();    
+    $q = $db->prepare('select * from commodity join category on c_id=category.cid where commodity.id = :id');
+    $q->bindValue(':id',$_GET['id'],PDO::PARAM_INT);
+    $q->execute();
+    $p = $q->fetchObject();    
   ?>
 
-  <h1><?php echo $post->title; ?>  </h1>
-  <p><img src="<?php echo $post->pic ?>" alt=></p>
-  <p>介绍:<?php echo htmlentities($post->body); ?></p>
-  <p>分类:<?php echo $post->name; ?></p>
-  <p>价格:<?php echo htmlentities($post->price); ?>元</p>
-  <p>生产日期:<?php echo htmlentities($post->data); ?></p>
-  <p>库存:<?php echo htmlentities($post->stock); ?></p>
+  <h1><?php echo $p->title; ?>  </h1>
+  <p><img src="<?php echo $p->pic ?>" alt=></p>
+  <p>介绍:<?php echo htmlentities($p->body); ?></p>
+  <p>分类:<?php echo $p->name; ?></p>
+  <p>价格:<?php echo htmlentities($p->price); ?>元</p>
+  <p>生产日期:<?php echo htmlentities($p->data); ?></p>
+  <p>库存:<?php echo htmlentities($p->stock); ?></p>
 <h2>评论列表</h2>
-    <form action="../comments/save.php" method="post">
-      <input type="hidden" name="post_id" value='<?php echo $_GET['id']; ?>'>
-      <label for="title">标题</label>
-      <input type="text" name="title" value="">
-      <br/>
-      <label for="body">正文</label>
-      <textarea name="body"></textarea>
-      <br/>
-      <input type="submit" value="提交">
-    </form>
   <?php 
-          require_once '../inc/db.php';
 
-          $query = $db->query( 'select * from comments where post_id = ' . $_GET['id']);
+          $query = $db->query( 'select * from users join comments on comments.user_id = users.id where post_id = ' . $_GET['id']);
           while ( $post =  $query->fetchObject() ) {
         ?>
         <ul>
           <li>
+            <?php echo "用户:" ?>
+            <?php echo $post->nickname ?>
+            <br>
             <?php echo "标题:" ?>
             <?php echo $post->title ?>
             <br/>
@@ -53,5 +45,8 @@
           </li>
         </ul>
         <?php } ?>
+  <a href="commodity.php?id=<?php echo $p->c_id ?>">返回上一页</a>
+  <br>
+  <a href="../">返回首页</a>
 </body>
 </html>

@@ -10,7 +10,7 @@
   require_once '../inc/db.php';
 
   if(is_login()) 
-    $name=current_user()->name;
+    $id=$_SESSION['userid'];
   else{
     set_notice('必须登录后方可使用本功能');
     redirect_to('../sessions/new.php');
@@ -18,7 +18,7 @@
 ?>
 <form action="../comments/save.php" method="post">
   <input type="hidden" name="post_id" value='<?php echo $_GET['id']; ?>'>
-  <input type="hidden" name="user_name" value='<?php echo $name ?>'>
+  <input type="hidden" name="user_id" value='<?php echo $id ?>'>
   <label for="title">标题</label>
   <input type="text" name="title" value="">
   <br/>
@@ -27,4 +27,7 @@
   <br/>
   <input type="submit" value="提交">
 </form>
+<a href="../category/commodity.php?id=<?php echo $_GET['id'] ?>">返回上一页</a>
+<br>
+<a href="../">返回首页</a>
 </body>

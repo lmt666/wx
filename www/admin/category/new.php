@@ -13,6 +13,9 @@
 	<br/>
 	<input type="submit" value="提交" />
 </form>
+<form action="./">
+	<input type="submit" value="取消">
+</form>
 
 </body>
 </html>

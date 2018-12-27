@@ -6,7 +6,7 @@
 </head>
 <body>
 	<?php
-		require_once '../inc/db.php';
+		require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
 		$id = $_GET['id'];
     $query = $db->prepare('select * from commodity where id = :id');
     $query->bindValue(':id',$id,PDO::PARAM_INT);

@@ -8,20 +8,31 @@
 </head>
 <body>
 <?php 
-  require_once './inc/session.php';
-  require_once './inc/db.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/session.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
 
   if(!is_login()){
       set_notice('必须登录后方可使用本功能');
       redirect_to('../sessions/new.php');
   }
+  else{
+    $q=$db->prepare('select power from users where id = :id');
+    $q->bindParam(':id',$_SESSION['userid'],PDO::PARAM_INT);
+    $q->execute();
+    $p=$q->fetchObject();
+    if($p->power=='0'){
+      redirect_to("warning.php");
+    }
+  }
 ?>
 <div id="main">
 <div id="title">
 <div id="user">
-<?php echo '当前用户: ' . current_user()->name; ?>
+<?php echo '当前用户: ' . current_user()->nickname; ?>
 <br>
   <a href="./order/" class="fff">订单</a>
+  <br>
+  <a href="./order/histories/" class="fff">历史纪录</a>
   <br>
   <a href="../" class="fff">返回前台</a>
 </div>
@@ -49,7 +60,7 @@
 </nav>
 </div>
 <?php 
-        require_once './inc/db.php';
+        require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
 
         $query = $db->query('select * from details');
         while ( $post =  $query->fetchObject() ) {

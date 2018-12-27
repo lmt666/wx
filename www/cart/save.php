@@ -11,11 +11,11 @@ $stock=$post->stock;
 if($_POST['num']>$stock){
 	echo "库存不足!!!";
 }else{
-	$sql = "insert into cart(user_id,name,price,num,total,co_id) values(:user_id,:name,:price,:num,:total,:co_id);" ;  
+	$sql = "insert into cart(user_id,cname,price,num,total,co_id) values(:user_id,:cname,:price,:num,:total,:co_id);" ;  
 $query = $db->prepare($sql);
 $total=$_POST['price'] * $_POST['num'];
 $query->bindParam(':user_id',$_SESSION['userid'],PDO::PARAM_STR);
-$query->bindParam(':name',$_POST['name'],PDO::PARAM_STR);
+$query->bindParam(':cname',$_POST['cname'],PDO::PARAM_STR);
 $query->bindParam(':price',$_POST['price'],PDO::PARAM_INT);
 $query->bindParam(':num',$_POST['num'],PDO::PARAM_INT);
 $query->bindParam(':total',$total,PDO::PARAM_INT);

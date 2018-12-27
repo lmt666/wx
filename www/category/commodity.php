@@ -8,7 +8,7 @@
   <?php        
     require_once '../inc/db.php';    
     
-    $query = $db->prepare('select * from commodity join category on c_id=category.id where commodity.id = :id');
+    $query = $db->prepare('select * from commodity join category on c_id=category.cid where commodity.id = :id');
     $query->bindValue(':id',$_GET['id'],PDO::PARAM_INT);
     $query->execute();
     $post = $query->fetchObject();  
@@ -22,29 +22,34 @@
   <p>库存:<?php echo htmlentities($post->stock); ?></p>
  <h2>评论列表</h2>
 
- <a href="../comments/new.php?id=<?php echo $post->id;?>">我要评论</a>
+
   <?php 
           require_once '../inc/db.php';
 
-          $query = $db->query( 'select * from comments where post_id = ' . $_GET['id']);
-          while ( $post =  $query->fetchObject() ) {
+          $query = $db->query( 'select * from comments join users on comments.user_id = users.id where post_id = ' . $_GET['id']);
+          while ( $p =  $query->fetchObject() ) {
         ?>
         <ul>
           <li>
             <?php echo "用户:"?>
-            <?php echo $post->user_name ?>
+            <?php echo $p->nickname ?>
             <br>
             <?php echo "标题:" ?>
-            <?php echo $post->title ?>
+            <?php echo $p->title ?>
             <br/>
             <?php echo "内容:" ?>
-            <?php echo $post->body ?>
+            <?php echo $p->body ?>
             <br/>
             <?php echo "发表时间:" ?>
-            <?php echo $post->create_at ?>
+            <?php echo $p->create_at ?>
 
           </li>
         </ul>
         <?php } ?>
+       <a href="../comments/new.php?id=<?php echo $post->id;?>">我要评论</a>
+       <br>
+       <a href="show.php?id=<?php echo $post->c_id?>">返回上一页</a>
+       <br>
+       <a href="../">返回首页</a>
 </body>
 </html>

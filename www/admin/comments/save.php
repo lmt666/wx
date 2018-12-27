@@ -1,6 +1,6 @@
 <?php 
-require_once '../inc/db.php';
-require_once '../inc/common.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/common.php';
 $sql = "insert into comments(post_id,title,body,create_at) values(:post_id, :title, :body, :create_at);" ;	
 $query = $db->prepare($sql);
 $query->bindParam(':post_id',$_POST['post_id'],PDO::PARAM_INT);

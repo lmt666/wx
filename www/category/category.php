@@ -19,10 +19,11 @@
         while ( $post =  $query->fetchObject() ) {  
       ?>
           <ul>
-            <li><a href="show.php?id=<?php echo $post->id ?>"><?php echo $post->name ?></a></li>    
+            <li><a href="show.php?id=<?php echo $post->cid ?>"><?php echo $post->name ?></a></li>    
           </ul> 
       <?php  } ?>
 </nav>
 </div>
+<a href="../">返回首页</a>
 </body>
 </html>

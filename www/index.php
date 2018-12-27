@@ -16,7 +16,7 @@ require_once './inc/db.php';
 <div id="user">
 <?php 
   if(is_login()) 
-    echo '当前用户: ' . current_user()->name;
+    echo '当前用户: ' . current_user()->nickname;
   else
     echo "你还未登陆";
 ?>
@@ -29,9 +29,7 @@ require_once './inc/db.php';
 <br>
 <a href="./cart/cart.php" class="fff">购物车</a>
 <br>
-<a href="./order/" class="fff">订单</a>
-<br>
-<a href="./order/histories" class="fff">历史订单</a>
+<a href="personalinformation.php" class="fff">个人资料</a>
 <br>
 <a href="./admin/" class="fff">管理后台</a>
 </div>

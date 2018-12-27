@@ -1,6 +1,6 @@
 <?php 
-require_once '../inc/db.php';
-require_once '../inc/common.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/common.php';
 
 $dest_path = "/uploads/commodity-" . rand() . ".jpg";
 $dest = $_SERVER["DOCUMENT_ROOT"] . $dest_path;
@@ -19,6 +19,6 @@ $query->bindParam(':stock',$_POST['stock'],PDO::PARAM_INT);
 if (!$query->execute()) {	
 	print_r($query->errorInfo());
 }else{
-	redirect_to("../category");
+	redirect_to("commodity.php?id=" . $_POST['c_id']);
 };
 ?>

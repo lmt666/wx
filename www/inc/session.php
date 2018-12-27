@@ -62,7 +62,7 @@
 		if(is_int($id_or_name)){
 			$where = "id = :id";
 		}else{
-			$where = "name = :id";
+			$where = "nickname = :id";
 		}
 
 		global $db;

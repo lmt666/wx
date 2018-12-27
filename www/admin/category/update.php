@@ -1,8 +1,8 @@
 <?php 
-require_once '../inc/db.php';
-require_once '../inc/common.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/common.php';
 $id = $_POST['id'];
-$sql = "update category set name = :name where id = :id;" ;	
+$sql = "update category set name = :name where cid = :id;" ;	
 $query = $db->prepare($sql);
 $query->bindValue(':name',$_POST['name'],PDO::PARAM_STR);
 echo $query->bindValue(':id',$id,PDO::PARAM_INT);

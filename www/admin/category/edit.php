@@ -6,9 +6,9 @@
 </head>
 <body>
 	<?php
-		require_once '../inc/db.php';
+		require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
 		$id = $_GET['id'];
-    $query = $db->prepare('select * from category where id = :id');
+    $query = $db->prepare('select * from category where cid = :id');
     $query->bindValue(':id',$id,PDO::PARAM_INT);
     $query->execute();
     $post = $query->fetchObject();
@@ -22,9 +22,11 @@
 		<textarea name="name">
 			<?php echo $post->name; ?>
 		</textarea>
-
 		<br>
 		<input type="submit" value="提交" />
+	</form>
+	<form action="./">
+		<input type="submit" value="取消">
 	</form>
 </body>
 </html>

@@ -6,6 +6,15 @@
 </head>
 
 <body>
+<?php 
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/session.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+
+  if(!is_login()){
+      set_notice('必须登录后方可使用本功能');
+      redirect_to('../sessions/new.php');
+  }
+?>
   <table border=1>
     <caption><h1>购物车</h1></caption>
     <thead>
@@ -21,12 +30,13 @@
    <?php 
         require_once '../inc/db.php';
         require_once '../inc/session.php';
+        $sum='0';
         $query = $db->query('select * from cart where user_id = ' . $_SESSION['userid']) ;
         while ( $post =  $query->fetchObject() ) {
         
       ?>
           <tr>
-            <td><?php echo $post->name; ?></td>
+            <td><?php echo $post->cname; ?></td>
             <td><?php echo $post->price; ?></td>
             <td><?php echo $post->num; ?></td>
             <td><?php echo $post->total; ?></td>    
@@ -34,10 +44,16 @@
             <td><a href="delete.php?id=<?php echo $post->id; ?>">删除</td>    
           </tr> 
 
-      <?php } ?>
-
+      <?php 
+        $sum=$sum+$post->total;
+      } ?>
   </table>
-  <a href="balance.php">结算</a>
+  <?php echo "合计" . $sum . "元"; ?>
+  <br>
+  <form action="balance.php" method="post">
+    <input type="hidden" name="sum" value="<?php echo $sum ?>">
+    <input type="submit" name="结算">
+  </form>
   <br>
   <a href="../index.php">返回首页</a>
 </body>
