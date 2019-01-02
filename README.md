@@ -27,8 +27,8 @@
 
 ### 前端 ###
 
-bootstrap
+bootstrap、js、css
 
 ### 后端 ###
 
-composer自动加载
+PDO、composer自动加载
