@@ -1,14 +1,17 @@
 #项目
+
 购物网站
 
 ----------
 
 #代码
+
 [https://github.com/lmt666/git/tree/master/www](https://github.com/lmt666/git/tree/master/www)
 
 ----------
 
 #功能
+
 - 注册和登陆。
 - 商品的增删改查，图片上传。
 - 分页。
@@ -20,7 +23,10 @@
 ----------
 
 #技术
+
 ###前端
+
 bootstrap、jQuery
 ###后端
+
 composer自动加载
