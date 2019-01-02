@@ -7,7 +7,7 @@
 <body>
 <h1>New post</h1>
  
-<img src="./captcha.php" alt="">
+
 <form action="save.php" method="post" enctype="multipart/form-data">
 	<?php 
         require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';

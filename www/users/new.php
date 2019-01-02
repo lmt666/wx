@@ -19,6 +19,9 @@
 				<div class="form-group">
 					 <label for="password">Password</label><input type="password" name="password" class="form-control" />
 				</div>
+				<div>
+					<label for="captcha">验证码</label><input type="varchar" name="captcha" class="form-control"><img src="captcha.php" alt="">
+				</div>
                      <button type="submit" class="btn btn-default">注册</button>
 			</form>
 		</div>

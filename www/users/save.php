@@ -7,9 +7,31 @@ require_once __DIR__ . '/../vendor/autoload.php';
 <meta charset="utf-8">
 <head></head>
 <body>	
-<?php
+<?php 
+	if(!$_POST['name']||!$_POST['password']){
+		 ?>
+	<script>
+	alert('用户名或密码不能为空!');
+	window.history.back(-1);
+	</script>
 
-$name = trim($_POST['name']);
+
+<?php }
+else{
+
+$captcha = $_POST["captcha"];
+
+if(strtolower($_SESSION["captcha"]) != strtolower($captcha)){
+	?>
+	<script>
+		alert('验证码错误!');
+		window.history.back(-1);
+	</script>
+<?php } 
+else{
+	$_SESSION["captcha"] = "";
+
+	$name = trim($_POST['name']);
 	if(load_user($name)){
     ?> 
 	  <script>
@@ -27,12 +49,15 @@ $name = trim($_POST['name']);
 				
 		if (!$query->execute()) {	
 			print_r($query->errorInfo());
-		}else{
-			redirect_to("../sessions/new.php");
-		};
-	}
+		}	
+	?>
+	<script>
+		alert('注册成功!');
+		window.location="../sessions/new.php";
+	</script>
+	
+<?php } } } ?>
 
-?> 
 </body>
 </html>
 	
