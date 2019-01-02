@@ -26,7 +26,7 @@
 
 ### 前端 ###
 
-bootstrap、jQuery
+bootstrap
 
 ### 后端 ###
 
