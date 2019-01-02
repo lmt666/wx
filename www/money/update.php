@@ -1,7 +1,7 @@
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/session.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/common.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+
 	$sql="update users set money = money + :money where id = :id";
 	$query=$db->prepare($sql);
 	$query->bindParam(':id',$_SESSION['userid'],PDO::PARAM_INT);
@@ -9,7 +9,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/common.php';
 	if(!$query->execute()){
 		print_r($query->errorInfo());
 	}else{
-		redirect_to('../personalinformation.php');
+		redirect_to('../');
 	}
 
  ?>

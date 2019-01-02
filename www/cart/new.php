@@ -1,3 +1,7 @@
+<?php 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+?>
 <!doctype html>
 <html>
 <head>
@@ -6,16 +10,14 @@
 </head>
 <body>
 <?php 
-  require_once '../inc/session.php';
-  require_once '../inc/db.php';
 
   if(!is_login()){
-      set_notice('必须登录后方可使用本功能');
-      redirect_to('../sessions/new.php');
-  }
-?>
-<?php
-		require_once '../inc/db.php';
+  ?>
+    <script>
+      alert('你还未登陆!');
+      window.location = "../sessions/new.php";
+    </script>
+<?php }
 		$id = $_GET['id'];
     $query = $db->prepare('select * from commodity where id = :id');
     $query->bindValue(':id',$id,PDO::PARAM_INT);

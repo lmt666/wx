@@ -1,12 +1,13 @@
+<?php 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+?>
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
 <head></head>
 <body>
 <?php 
-require_once '../inc/db.php';
-require_once '../inc/common.php';
-require_once '../inc/session.php';
 $s="select * from commodity where id = :id";
 $query=$db->prepare($s);
 $query->bindParam(':id',$_POST['id'],PDO::PARAM_INT);

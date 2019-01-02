@@ -1,6 +1,6 @@
 <?php 
-require_once '../inc/common.php';
-require_once '../inc/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 $id=$_GET['co_id'];
 $sql="update commodity set stock = stock + :num where id= :id;";

@@ -1,3 +1,7 @@
+<?php 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+?>
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
@@ -6,10 +10,6 @@
 </head>
 <body>
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/common.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/session.php';
-
 	$query=$db->query('select * from users where id = ' . $_SESSION['userid']);
 	$post=$query->fetchObject();
 	if(@$_POST['sum']>$post->money){
@@ -17,17 +17,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/session.php';
 	}else{
 ?>
 
-<?php 
-
-	$sql="update users set money = money - :money where id = :id";
-	$query=$db->prepare($sql);
-	$query->bindParam(':id',$_SESSION['userid'],PDO::PARAM_INT);
-	$query->bindParam(':money',$_POST['sum'],PDO::PARAM_INT);
-	if(!$query->execute()){
-		print_r($query->errorInfo());
-	}
-}
-?>
+<?php } ?>
 
 <?php 
 if(!@$_POST['id']){
@@ -77,6 +67,7 @@ if(!@$_POST['id']){
 			</ul>
 		<?php } ?>
   <form action="../order/save.php" method="post">
+    <input type="hidden" name="sum" value="<?php echo $_POST['sum'] ?>">
 	<input type="hidden" name="a_id" value="<?php echo $post->id ?>">
 	<input type="submit" value="提交">
   </form> 

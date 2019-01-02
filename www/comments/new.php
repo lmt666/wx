@@ -1,3 +1,7 @@
+<?php 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+?>
 <!doctype html>
 <html>
 <head>
@@ -6,8 +10,6 @@
 </head>
 <body>
 <?php 
-  require_once '../inc/session.php';
-  require_once '../inc/db.php';
 
   if(is_login()) 
     $id=$_SESSION['userid'];

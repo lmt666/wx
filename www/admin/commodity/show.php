@@ -15,7 +15,7 @@
   ?>
 
   <h1><?php echo $p->title; ?>  </h1>
-  <p><img src="<?php echo $p->pic ?>" alt=></p>
+  <p><img src="<?php echo $p->pic ?>" alt="" style="height: 200px;width:200px;"></p>
   <p>介绍:<?php echo htmlentities($p->body); ?></p>
   <p>分类:<?php echo $p->name; ?></p>
   <p>价格:<?php echo htmlentities($p->price); ?>元</p>

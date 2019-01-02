@@ -1,7 +1,7 @@
 <?php 
-require_once '../inc/common.php';
-require_once '../inc/db.php';
-require_once '../inc/session.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+
 	$id=$_GET['id'];
 	$query=$db->query('select * from orders where oid = ' . $id);
 	$post=$query->fetchObject();

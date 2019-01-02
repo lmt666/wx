@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/common.php';
 
 $dest_path = "/uploads/commodity-" . rand() . ".jpg";
-$dest = $_SERVER["DOCUMENT_ROOT"] . $dest_path;
+$dest = '../..' . $dest_path;
 move_uploaded_file($_FILES["pic"]["tmp_name"], $dest);
 
 $sql = "insert into commodity(c_id,title,pic,body,price,data,stock) values(:c_id, :title, :pic, :body, :price, :data, :stock);" ;	

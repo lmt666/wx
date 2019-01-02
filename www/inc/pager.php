@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"> 
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+
+
 <?php 
 require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php' ;
 /**
@@ -71,12 +84,13 @@ class PAger{
 		
 		return <<< EOT
 	  <div id="pager"> 
-	    <a href="$page_first_q">首页</a>
-	    <a href="$page_previous_q">上一页</a>
-	    <a href="$page_next_q">下一页</a>    
-	    <a href="$page_last_q">末页</a>  
-	    <span>当前第$this->page_current 页</span>
-	    <span>总共 $this->page_last 页</span> 
+	    <ul class="pagination">
+		  <li><a href="$page_first_q">首页</a></li>
+		  <li><a href="$page_previous_q">上一页</a></li>
+		  <li><a href="$page_next_q">下一页</a></li>
+		  <li><a href="$page_last_q">末页</a></li>
+		  <li><span>$this->page_current/$this->page_last</span></li>
+		</ul>
 	  </div>    
 EOT;
 	}
@@ -90,3 +104,5 @@ EOT;
 
 
  ?>
+ </body>
+</html>

@@ -1,3 +1,7 @@
+<?php 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+?>
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
@@ -5,10 +9,6 @@
 <body>
 <form action="../cart/balance.php" method="post"> 
  	<?php 
-		require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
-		require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/common.php';
-		require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/session.php';
-
 		$sql="select * from adress where user_id = :user_id";
 		$query=$db->prepare($sql);
 		$query->bindParam(':user_id',$_SESSION['userid'],PDO::PARAM_INT);

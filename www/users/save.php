@@ -1,12 +1,22 @@
+<?php 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/inc/db.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+?>
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head></head>
+<body>	
 <?php
-require_once '../inc/session.php';
-require_once '../inc/db.php';
-require_once '../inc/common.php';
 
 $name = trim($_POST['name']);
-	if(load_user($name)){		
-		set_notice('用户名已存在！');
-		redirect_back();
+	if(load_user($name)){
+    ?> 
+	  <script>
+	    alert('用户名已存在！');
+	    window.history.back(-1);
+	  </script>
+	<?php 				
 	}else{
 		$pwd = encrypt_password($_POST['password']); 
 
@@ -23,6 +33,8 @@ $name = trim($_POST['name']);
 	}
 
 ?> 
+</body>
+</html>
 	
 
 
