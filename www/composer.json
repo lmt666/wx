@@ -1,8 +1,0 @@
-{
-    "require": {
-    },
-    "autoload": {
-    	"files": ["inc/db.php","inc/common.php","inc/pager.func.php","inc/pager.php","inc/session.php"],
-    	"classmap": ["inc/"]
-    }
-}
