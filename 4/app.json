@@ -1,0 +1,31 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/recent/index",
+    "pages/hot/index",
+    "pages/hot/show",
+    "pages/search/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#000",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"white"
+  },
+  "tabBar":{
+    "list":[
+      {
+        "pagePath": "pages/index/index",
+        "text":"最近"
+      },
+      {
+        "pagePath": "pages/hot/index",
+        "text": "经典"
+      },
+      {
+        "pagePath": "pages/search/index",
+        "text": "搜索"
+      }
+    ]
+  }
+}

@@ -1,0 +1,68 @@
+page{
+	font-family: "Microsoft YaHei";
+	background-color: #fff;
+	display: flex;
+	flex-direction:column;
+}
+.page-header{
+	display: flex;
+	justify-content:center;
+	border-bottom: 2rpx solid lightgrey;
+	margin-bottom: 10rpx;
+}
+.page-header-text{
+	padding: 20rpx 40rpx;
+	color: grey;
+	font-size: 40rpx;
+	text-align:center;
+}
+.page-body{
+	display: flex;
+	flex-direction:column;
+}
+.item{
+	display: flex;
+	padding: 20rpx 60rpx;
+}
+.item .images{
+	width: 250rpx;
+	height: 250rpx;
+	margin-right: 20rpx;
+}
+.item .meta{
+	flex: 1;
+}
+.item .title{
+	display: block;
+	margin-bottom: 10rpx;
+	font-size: 35rpx;
+	font-weight: bold;
+}
+.item .original_title{
+	display: block;
+	margin-bottom: 15rpx;
+	font-size: 25rpx; 
+	color: grey;
+}
+.item .durations{
+	font-size: 25rpx;
+	color: grey;
+}
+.item .genres{
+	font-size: 25rpx;
+	color: grey;
+}
+.item .directors{
+	font-size: 25rpx;
+	color: grey;
+}
+.item .casts{
+	font-size: 25rpx;
+	color: grey;
+}
+
+.item .rating{
+	font-size: 35rpx; 
+	font-weight: bold;
+	color: red;
+}
