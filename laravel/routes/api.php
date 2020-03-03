@@ -13,20 +13,42 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-//Route::middleware('auth.api')->get('article','ArticleController@Index')->name('article.index');
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+    //return $request->user();
+//});
 
+
+
+//**********************************************************************
+//****************************** v2.0 **********************************
+//**********************************************************************
 // 登陆
-Route::get('wxxcx/get','UserController@getWxUserInfo')->name('wxxcx.getwxuserinfo');
-Route::get('wxxcx/update','UserController@updateWxUserInfo')->name('wxxcx.updatewxuserinfo');
+Route::get('wxxcx/get','UserController@getWxUserInfo');
+Route::get('wxxcx/login','UserController@login');
+Route::get('wxxcx/failure','UserController@failure')->name('login');
 
-// 文章（经验分享）
-Route::middleware('auth.api')->get('article/{id}','ArticleController@Single')->name('article.single');
-Route::middleware('auth.api')->post('article/add','ArticleController@Add')->name('article.add');
-Route::middleware('auth.api')->post('article/me','ArticleController@Me')->name('article.me');
+// 公司
+Route::get('company','CompanyController@List');
+Route::get('company/{name}/job','CompanyController@JobList');
+
+// 岗位
+Route::get('job','JobController@List');
+Route::get('job/{id}','JobController@Detail');
+
+// 评论
+Route::get('job/{job_id}/comment','CommentController@List');
+Route::post('job/{job_id}/comment','CommentController@Add');
+Route::get('job/{job_id}/comment/{comment_id}/reply','CommentReplyController@List');
+Route::post('job/{job_id}/comment/{comment_id}/reply','CommentReplyController@Add');
 
 
+// 经验问答
+Route::get('article','ArticleController@List');
+Route::get('article/{id}','ArticleController@Detail');
+Route::post('article','ArticleController@Add');
 
-
+// 回答
+Route::get('article/{article_id}/answer','AnswerController@List');
+Route::post('article/{article_id}/answer','AnswerController@Add');
+Route::get('article/{article_id}/answer/{answer_id}/reply','AnswerReplyController@List');
+Route::post('article/{article_id}/answer/{answer_id}/reply','AnswerReplyController@Add');

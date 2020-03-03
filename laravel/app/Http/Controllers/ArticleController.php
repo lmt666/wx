@@ -3,74 +3,67 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Article;
-use App\_Return;
-use App\User;
+use Illuminate\Support\Facades\Storage;
+
+use App\Models\Article;
+use App\Models\_Return;
 
 
 class ArticleController extends Controller
 {
-	public function Index(){
-		return Article::get()->toArray();
-
-	}
-
-    public function Single($articleID){
+    
+    public function List(){
     	$article = new Article();
 		$return = new _Return();
     	
-    	$data = $article->single($articleID);
-    	if($data === false){
-    		return $return->error(404, 40400, 'Not found');
-    	}else{
-    		return $return->success($data, 'OK');
-    	}
+    	$data = $article->list();
+        if(empty($data['data'])){
+            return $return->error(404, 50001);
+        }else{  
+            return $return->success($data);
+        }
+        
+    }
+
+    public function Detail($article_id){
+        $article = new Article();
+        $return = new _Return();
+        
+        $data = $article->detail($article_id);
+        if(empty($data)){
+            return $return->error(404, 50001);
+        }else{
+            return $return->success($data);
+        }
+
     }
 
     public function Add(Request $request){
-    	$article = new Article();
-		$return = new _Return();
-        $user = new User();
+        $article = new Article();
+        $return = new _Return();
 
-        $token = substr($request->header('Authorization'), 7);
+        //$userinfo = $request->user()->toArray();
+        //$user_id = $userinfo['id'];
 
-        $userInfo = $user->where('api_token', $token)->get();
-        $userInfo = $userInfo->toArray();
-
-        if(empty($request['title']) || empty($request['content']) || empty($request['isAnonymous'])){
-            return $return->error(500, 50001, '缺少必要参数');
+        if(!isset($request['title']) || !isset($request['content']) || !isset($request['type'])){
+            return $return->error(500, 10004);
         }
 
-        if($request['isAnonymous'] != false && $request['isAnonymous'] != true){
-            return $return->error(500, 50000, '信息填写有误');
-        }
-
-        if($request['title'] == '' || $request['content'] == ''){
-            return $return->error(500, 50001, '你有字段为空，请检查。');
+        if($request['title'] == '' || $request['content'] == '' || $request['type'] == ''){
+            return $return->error(500, 10002);
         }
 
         if(strlen($request['title']) < 5){
-            return $return->error(500, 50001, '你的标题太短了，多写点吧~');
+            return $return->error(500, 10001);
         }
-        
-        $data = $article->add($userInfo[0], $request->only('title','content', 'isAnonymous'));
 
-        return $return->success($data, 'OK');
-	}
+        if($request['type'] != '经验' && $request['type'] != '问题'){
+            return $return->error(500, 10001);
+        }
 
-    public function Me(Request $request){
-        $article = new Article();
-        $return = new _Return();
-        $user = new User();
+        $data = $article->add(10, $request);
 
-        $token = substr($request->header('Authorization'), 7);
-
-        $userInfo = $user->where('api_token', $token)->get();
-        $userInfo = $userInfo->toArray();
-
-        $data = $article->me($userInfo[0]['OpenID']);
-
-        return $return->success($data, 'OK');
+        return $return->success($data);
     }
 }
 	
