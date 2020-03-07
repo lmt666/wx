@@ -10,8 +10,12 @@ class Answer extends Model
 	protected $fillable = ['content', 'user_id', 'article_id', 'audited', 'date'];
 	public $timestamps = false;
 
+    public function answer_replies(){
+        return $this->hasMany(AnswerReply::class);
+    }
+
     public function list($article_id){
-        $data = Answer::where('article_id', $article_id)->where('audited', 1)->where('answer_id', null)->leftJoin('users', 'answers.user_id', 'users.id')->selectRaw('answers.id, answers.content, answers.article_id, answers.date, answers.user_id, users.name as user_name, users.avatar as user_avatar')->orderBy('id', 'desc')->paginate(10)->toArray();
+        $data = Answer::where('article_id', $article_id)->where('audited', 1)->withCount(['answer_replies'])->leftJoin('users', 'answers.user_id', 'users.id')->selectRaw('users.name as user_name, users.avatar as user_avatar')->orderBy('id', 'desc')->paginate(10)->toArray();
 
         return $data;
     }

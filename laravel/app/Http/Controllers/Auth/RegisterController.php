@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
+use App\Models\_Return;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -46,12 +50,28 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-        ]);
+    {   
+        if(!isset($data['name']) || !isset($data['password'])){
+            return 1;
+        }
+
+        if($data['name'] == '' || $data['password'] == ''){
+            return 2;
+        }
+
+        $query = DB::table('users')->where('name', $data['name'])->get()->toArray();
+        if($query){
+            return 3;
+        }
+
+        if(strlen($data['password']) < 6){
+            return 4;
+        }
+        //return Validator::make($data, [
+            //'name' => 'required|string|max:255',
+            //'email' => 'required|string|email|max:255|unique:users',
+            //'password' => 'required|string|min:6',
+        //]);
     }
 
     /**
@@ -64,8 +84,16 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
-            'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'avatar' => 'http://homestead.test/storage/avatars/default-avatar.jpg',
+            'organization' => $data['organization'],
+            'admin' => 1,
         ]);
+    }
+
+    protected function registered(Request $request, $user){
+        $return = new _Return();
+        $data = $user->toArray();
+        return $return->success($data);
     }
 }

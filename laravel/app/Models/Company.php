@@ -20,4 +20,13 @@ class Company extends Model
 
     	return $data;
     }
+
+    // 判断company是否存在
+    public function company_exist($company_name){
+        if(Company::where('name', $company_name)->exists()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

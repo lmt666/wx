@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use App\Models\_Return;
 
 class LoginController extends Controller
 {
@@ -36,4 +41,38 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function login(Request $request){
+        $return = new _Return();
+
+        $this->validateLogin($request);
+
+        if ($this->attemptLogin($request)) {
+            $user = $this->guard()->user();
+            $token = $user->createToken('token');
+            $token->token->expires_at = Carbon::now()->addMinutes(60);
+            $token->token->save();
+            $token = $token->accessToken;
+    
+            $data = $user->toArray();
+            $data['access_token'] = $token;
+            return $return->success($data);
+        }else{
+            return $return->error(500, 20003);
+        }
+    }
+
+    public function logout(){
+        $return = new _Return();
+
+        $user = auth::guard()->user();
+
+        DB::table('oauth_access_tokens')->where('user_id', $user['id'])->delete();
+
+        return $return->success('登出成功!');
+    }
+
+    protected function username(){
+        return 'name';
+    } 
 }

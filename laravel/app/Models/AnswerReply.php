@@ -23,7 +23,7 @@ class AnswerReply extends Model
 	    	selectRaw('replies.user_id as aim_user_id , users2.name as aim_user_name, users2.avatar as aim_user_avatar');
 
 	    // 结果合并
-    	$data = $data1->union($data2)->orderBy('id', 'desc')->get();
+    	$data = $data1->union($data2)->orderBy('id', 'desc')->get()->toArray();
 
     	return $data;
     }
@@ -40,19 +40,22 @@ class AnswerReply extends Model
     	return 'OK';
     }
 
-    // 判断answer是否存在
-    public function answer_exist($answer_id){
-    	if(Answer::where('id', $answer_id)->exists()){
-            return true;
-        }else{
-            return false;
-        }
-    }
     // 判断answer和article是否正确匹配
     public function answer_match_article($article_id, $answer_id){
     	$data = Answer::where('id', $answer_id)->get()->toArray();
 
     	if($article_id == $data[0]['article_id']){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // 判断reply和answer是否正确匹配
+    public function reply_match_answer($answer_id, $reply_id){
+        $data = AnswerReply::where('id', $reply_id)->get()->toArray();
+
+        if($answer_id == $data[0]['answer_id']){
             return true;
         }else{
             return false;

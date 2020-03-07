@@ -23,7 +23,7 @@ class CommentReply extends Model
 	    	selectRaw('replies.user_id as aim_user_id , users2.name as aim_user_name, users2.avatar as aim_user_avatar');
 
 	    // 结果合并
-    	$data = $data1->union($data2)->orderBy('id', 'desc')->get();
+    	$data = $data1->union($data2)->orderBy('id', 'desc')->get()->toArray();
 
     	return $data;
     }
@@ -40,19 +40,22 @@ class CommentReply extends Model
     	return 'OK';
     }
 
-    // 判断comment是否存在
-    public function comment_exist($comment_id){
-    	if(Comment::where('id', $comment_id)->exists()){
-            return true;
-        }else{
-            return false;
-        }
-    }
     // 判断comment和job是否正确匹配
     public function comment_match_job($job_id, $comment_id){
     	$data = Comment::where('id', $comment_id)->get()->toArray();
 
     	if($job_id == $data[0]['job_id']){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // 判断reply和comment是否正确匹配
+    public function reply_match_comment($comment_id, $reply_id){
+        $data = CommentReply::where('id', $reply_id)->get()->toArray();
+
+        if($comment_id == $data[0]['comment_id']){
             return true;
         }else{
             return false;
