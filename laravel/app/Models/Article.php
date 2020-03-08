@@ -8,15 +8,23 @@ class Article extends Model
 {
 	protected $fillable = ['title', 'content', 'type', 'user_id', 'audited', 'date'];
 	public $timestamps = false;
+
+	public function answers(){
+		return $this->hasMany(Answer::class);
+	}
+
+	public function article_follows(){
+		return $this->hasMany(ArticleFollow::class);
+	}
 	
     public function list(){
-    	$data = Article::where('audited', 1)->leftJoin('users', 'articles.user_id', 'users.id')->selectRaw('articles.id, articles.title, articles.content, articles.type, articles.date, articles.user_id, users.name as user_name, users.avatar as user_avatar')->orderBy('id', 'desc')->paginate(10)->toArray();
+    	$data = Article::where('audited', 1)->withCount(['answers', 'article_follows'])->leftJoin('users', 'articles.user_id', 'users.id')->selectRaw('users.name as user_name, users.avatar as user_avatar')->orderBy('id', 'desc')->paginate(10)->toArray();
 
     	return $data;
     }
 
     public function detail($article_id){
-    	$data = Article::where('id', $article_id)->where('audited', 1)->leftJoin('users', 'user_id', 'id')->selectRaw('articles.id, articles.title, articles.content, articles.type, articles.date, articles.user_id, users.name as user_name, users.avatar as user_avatar')->get()->toArray();
+    	$data = Article::where('articles.id', $article_id)->where('audited', 1)->withCount(['answers', 'article_follows'])->leftJoin('users', 'articles.user_id', 'users.id')->selectRaw('users.name as user_name, users.avatar as user_avatar')->get()->toArray();
 
     	return $data;
     }
@@ -32,4 +40,5 @@ class Article extends Model
 
 		return 'OK';
 	}
+
 }

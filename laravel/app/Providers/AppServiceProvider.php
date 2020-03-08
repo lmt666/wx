@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         //设置token过期时间为60秒
-        //$this->app->get(AuthorizationServer::class)->enableGrantType(new PersonalAccessGrant(), new \DateInterval('PT60S'));
+        //$this->app->get(AuthorizationServer::class)->enableGrantType(new PersonalAccessGrant(), new DateInterval('PT60S'));
             
     }
 
