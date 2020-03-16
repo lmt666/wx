@@ -22,7 +22,7 @@ class CommentController extends Controller
         $comment = new Comment();
         $return = new _Return();
 
-        $user = auth::guard()->user();
+        $user = Auth::user();
 
         if(!isset($request['content'])){
             return $return->error(500, 10001);
@@ -35,5 +35,14 @@ class CommentController extends Controller
         $data = $comment->add($user['id'], $job_id, $request);
 
         return $return->success($data);
+    }
+
+    public function Del($company_name, $job_id, $comment_id){
+        $comment = new Comment();
+        $return = new _Return();
+
+        $data = $comment->del($comment_id);
+
+        return $return->success($data);     
     }
 }

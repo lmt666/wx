@@ -14,3 +14,5 @@
 Route::get('/', function(){
 	return view('index');
 });
+Route::get('auth/weixin', 'WeixinController@redirectToProvider');
+Route::get('auth/weixin/callback','WeixinController@handleProviderCallback');

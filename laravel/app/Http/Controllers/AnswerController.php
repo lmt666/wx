@@ -23,7 +23,7 @@ class AnswerController extends Controller
         $answer = new Answer();
         $return = new _Return();
 
-        $user = auth::guard()->user();
+        $user = Auth::user();
 
         if(!isset($request['content'])){
             return $return->error(500, 10001);
@@ -34,6 +34,15 @@ class AnswerController extends Controller
         }
 
         $data = $answer->add($user['id'], $article_id, $request);
+
+        return $return->success($data);
+    }
+
+    public function Del($article_id, $answer_id){
+        $answer = new Answer();
+        $return = new _Return();
+
+        $data = $answer->del($answer_id);
 
         return $return->success($data);
     }

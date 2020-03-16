@@ -15,13 +15,13 @@ class JobFollow extends Model
             'job_id' => $job_id
         ]);
 
-        return 'OK';
+        return '关注成功!';
     }
 
     public function cancelfollow($job_id, $user_id){
     	JobFollow::where('user_id', $user_id)->where('job_id', $job_id)->delete();
 
-        return 'OK';
+        return '取消成功!';
     }
 
     public function myfollow($user_id){

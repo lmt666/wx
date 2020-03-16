@@ -13,7 +13,7 @@ class ArticleFollowController extends Controller
     	$article_follow = new ArticleFollow();
         $return = new _Return();
 
-        $user = auth::guard()->user();
+        $user = Auth::user();
 
         $data = $article_follow->follow($article_id, $user['id']);
 
@@ -24,7 +24,7 @@ class ArticleFollowController extends Controller
         $article_follow = new ArticleFollow();
         $return = new _Return();
 
-        $user = auth::guard()->user();
+        $user = Auth::user();
 
         $data = $article_follow->cancelfollow($article_id, $user['id']);
 
@@ -35,7 +35,7 @@ class ArticleFollowController extends Controller
         $article_follow = new ArticleFollow();
         $return = new _Return();
 
-        $user = auth::guard()->user();
+        $user = Auth::user();
 
         $data = $article_follow->myfollow($user['id']);
  

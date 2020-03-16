@@ -6,6 +6,8 @@ use Carbon\Carbon;
 use Laravel\Passport\Passport;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Laravel\Passport\RouteRegistrar;
+use Illuminate\Support\Facades\Route;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -28,10 +30,11 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         Passport::routes();
 
+
         // token有效期
         Passport::tokensExpireIn(Carbon::now()->addMinutes(20));
         // 可刷新token时间
         Passport::refreshTokensExpireIn(Carbon::now()->addDays(2));
-        //
+        
     }
 }

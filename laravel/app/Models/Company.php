@@ -21,4 +21,22 @@ class Company extends Model
     	return $data;
     }
 
+    // 按工作类别筛选
+    public function category($company_name, $category){
+        $data = Job::where('company_name', $company_name)->whereIn('category', $category)->orderBy('id', 'desc')->paginate(10)->toArray();
+
+        return $data;
+    }
+    // 按工作地点筛选
+    public function place($company_name, $place){
+         $data = Job::where('company_name', $company_name)->whereIn('place', $place)->orderBy('id', 'desc')->paginate(10)->toArray();
+
+        return $data;
+    }
+    // 按工作类别和工作地点筛选
+    public function category_place($company_name, $category, $place){
+         $data = Job::where('company_name', $company_name)->whereIn('category', $category)->whereIn('place', $place)->orderBy('id', 'desc')->paginate(10)->toArray();
+
+        return $data;
+    }
 }

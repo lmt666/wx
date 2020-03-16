@@ -28,7 +28,13 @@ class Answer extends Model
             'date' => date('Y-m-d')
         ]);
 
-        return 'OK';
+        return '评论成功!';
     }
+
+    public function del($answer_id){
+        Answer::where('id', $answer_id)->delete();
+
+        return '删除成功!';
+    }   
 
 }

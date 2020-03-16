@@ -27,7 +27,13 @@ class Comment extends Model
             'date' => date('Y-m-d')
         ]);
 
-        return 'OK';
+        return '评论成功!';
+    }
+
+    public function del($comment_id){
+        Comment::where('id', $comment_id)->delete();
+
+        return '删除成功!';
     }
     
 }

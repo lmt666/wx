@@ -38,7 +38,13 @@ class Article extends Model
 			'date' => date('Y-m-d')
 		]);
 
-		return 'OK';
+		return '发布成功!';
+	}
+
+	public function del($article_id){
+		Article::where('id', $article_id)->delete();
+
+		return '删除成功!';
 	}
 
 }

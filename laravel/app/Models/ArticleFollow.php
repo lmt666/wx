@@ -15,13 +15,13 @@ class ArticleFollow extends Model
             'article_id' => $article_id
         ]);
 
-        return 'OK';
+        return '收藏成功!';
     }
 
     public function cancelfollow($article_id, $user_id){
     	ArticleFollow::where('user_id', $user_id)->where('article_id', $article_id)->delete();
 
-        return 'OK';
+        return '取消成功!';
     }
 
     public function myfollow($user_id){

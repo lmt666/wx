@@ -9,7 +9,9 @@
         "iwanli/wxxcx": "^2.0",
         "laravel/framework": "5.4.*",
         "laravel/passport": "^4.0",
-        "laravel/tinker": "~1.0"
+        "laravel/socialite": "~3.0",
+        "laravel/tinker": "~1.0",
+        "socialiteproviders/weixin-web": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -49,5 +51,7 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
+    },
+    "repositories": {
     }
 }

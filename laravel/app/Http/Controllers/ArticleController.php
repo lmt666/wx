@@ -17,7 +17,7 @@ class ArticleController extends Controller
     public function List(){
     	$article = new Article();
 		$return = new _Return();
-    	
+
     	$data = $article->list();
 
         return $return->success($data);  
@@ -36,7 +36,7 @@ class ArticleController extends Controller
         $article = new Article();
         $return = new _Return();
 
-        $user = auth::guard()->user();
+        $user = Auth::user();
 
         if(!isset($request['title']) || !isset($request['content']) || !isset($request['type'])){
             return $return->error(500, 10001);
@@ -59,6 +59,13 @@ class ArticleController extends Controller
         return $return->success($data);
     }
 
-    
+    public function Del($article_id){
+        $article = new Article();
+        $return = new _Return();
+
+        $data = $article->del($article_id);
+
+        return $return->success($data);
+    }    
 }
 	
