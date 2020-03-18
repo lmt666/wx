@@ -65,7 +65,7 @@ class LoginController extends Controller
     public function logout(){
         $return = new _Return();
 
-        $user = Auth::guard()->user();
+        $user = Auth::guard('api')->user();
 
         DB::table('oauth_access_tokens')->where('user_id', $user['id'])->delete();
 

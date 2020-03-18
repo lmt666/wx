@@ -20,7 +20,7 @@ class VerifyTokenExpire
     {
         if($request->user('api')){
             // 获取当前用户
-            $user = auth::guard()->user();
+            $user = Auth::guard('api')->user();
             if(Carbon::now() > $request->user('api')->token()->expires_at){ // 判断token是否过期
                 DB::table('oauth_access_tokens')->where('user_id', $user->id)->delete(); //删除旧token
 

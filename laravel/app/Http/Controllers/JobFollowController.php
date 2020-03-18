@@ -13,7 +13,7 @@ class JobFollowController extends Controller
     	$job_follow = new JobFollow();
         $return = new _Return();
 
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
 
         $data = $job_follow->follow($job_id, $user['id']);
 
@@ -24,7 +24,7 @@ class JobFollowController extends Controller
         $job_follow = new JobFollow();
         $return = new _Return();
 
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
 
         $data = $job_follow->cancelfollow($job_id, $user['id']);
 
@@ -35,7 +35,7 @@ class JobFollowController extends Controller
         $job_follow = new JobFollow();
         $return = new _Return();
 
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
 
         $data = $job_follow->myfollow($user['id']);
  

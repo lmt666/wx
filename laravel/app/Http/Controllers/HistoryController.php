@@ -13,7 +13,7 @@ class HistoryController extends Controller
     	$history = new History();
     	$return = new _Return();
 
-    	$user = Auth::user();
+    	$user = Auth::guard('api')->user();
 
     	$data = $history->list($user['id']);
 
@@ -24,7 +24,7 @@ class HistoryController extends Controller
     	$history = new History();
     	$return = new _Return();
 
-    	$user = Auth::user();
+    	$user = Auth::guard('api')->user();
 
     	$data = $history->add($article_id, $user['id']);
 
@@ -35,7 +35,7 @@ class HistoryController extends Controller
     	$history = new History();
     	$return = new _Return();
 
-    	$user = Auth::user();
+    	$user = Auth::guard('api')->user();
 
     	$data = $history->del($article_id, $user['id']);
 
@@ -46,7 +46,7 @@ class HistoryController extends Controller
     	$history = new History();
     	$return = new _Return();
 
-    	$user = Auth::user();
+    	$user = Auth::guard('api')->user();
 
     	$data = $history->del($user['id']);
 

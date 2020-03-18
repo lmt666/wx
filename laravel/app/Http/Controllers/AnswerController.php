@@ -23,7 +23,7 @@ class AnswerController extends Controller
         $answer = new Answer();
         $return = new _Return();
 
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
 
         if(!isset($request['content'])){
             return $return->error(500, 10001);

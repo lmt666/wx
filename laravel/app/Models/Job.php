@@ -19,8 +19,7 @@ class Job extends Model
     }
 
     public function list(){
-    	$data = Job::orderBy('id', 'desc')->paginate(10)->toArray();
-
+        $data = Job::withCount(['job_follows'])->leftJoin('companies', 'jobs.company_name', 'companies.name')->selectRaw('companies.logo as company_logo')->orderBy('job_follows_count', 'desc')->orderBy('id', 'desc')->paginate(10)->toArray();
     	return $data;
     }
     // 按工作类别筛选
@@ -49,19 +48,19 @@ class Job extends Model
     }
 
     public function courses($job_id){
-        $data = DB::table('jobs_courses')->where('job_id', $job_id)->leftJoin('courses', 'jobs_courses.course_id', 'courses.id')->selectRaw('jobs_courses.id, course_id, name, major, college, semester, credit, summary')->get();
+        $data = DB::table('jobs_courses')->where('job_id', $job_id)->leftJoin('courses', 'jobs_courses.course_id', 'courses.id')->leftJoin('colleges', 'courses.college_id', 'colleges.id')->selectRaw('jobs_courses.id, course_id, courses.name, courses.major, college_id, colleges.name as college_name, semester, credit, courses.summary')->paginate(10)->toArray();
 
         return $data;
     }
 
     public function books($job_id){
-        $data = DB::table('jobs_books')->where('job_id', $job_id)->leftJoin('books', 'jobs_books.book_id', 'books.id')->selectRaw('jobs_books.id, book_id, name, pic, author, translator, press')->get();
+        $data = DB::table('jobs_books')->where('job_id', $job_id)->leftJoin('books', 'jobs_books.book_id', 'books.id')->selectRaw('jobs_books.id, book_id, name, pic, author, translator, press')->paginate(10)->toArray();
 
         return $data;
     }
 
     public function competitions($job_id){
-        $data = DB::table('jobs_competitions')->where('job_id', $job_id)->leftJoin('competitions', 'jobs_competitions.competition_id', 'competitions.id')->selectRaw('jobs_competitions.id, competition_id, name, link')->get();
+        $data = DB::table('jobs_competitions')->where('job_id', $job_id)->leftJoin('competitions', 'jobs_competitions.competition_id', 'competitions.id')->selectRaw('jobs_competitions.id, competition_id, name, link')->paginate(10)->toArray();
 
         return $data;
     }

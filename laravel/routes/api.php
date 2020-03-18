@@ -57,7 +57,7 @@ Route::middleware(['auth:api', 'verify_token'])->get('article/{id}/follow', 'Art
 Route::middleware(['auth:api', 'verify_token'])->delete('article/{id}/follow', 'ArticleFollowController@CancelFollow');
 
 // 回答
-Route::middleware(['auth:api'])->get('article/{article_id}/answer', 'AnswerController@List');
+Route::middleware(['auth:api', 'verify_token'])->get('article/{article_id}/answer', 'AnswerController@List');
 Route::get('article/{article_id}/answer/{answer_id}/reply', 'AnswerReplyController@List');
 Route::middleware(['auth:api', 'verify_token'])->post('article/{article_id}/answer', 'AnswerController@Add');
 Route::delete('article/{article_id}/answer/{answer_id}', 'AnswerController@Del');
@@ -65,7 +65,7 @@ Route::middleware(['auth:api', 'verify_token'])->post('article/{article_id}/answ
 Route::delete('article/{article_id}/answer/{answer_id}/reply/{reply_id}', 'AnswerReplyController@Del');
 
 // 我的
-Route::group(['middleware' => 'auth:api'], function(){
+Route::group(['middleware' => 'auth:api',  'middleware' => 'verify_token'], function(){
 	Route::get('myfollow/job', 'JobFollowController@MyFollow');
 	Route::get('myfollow/article', 'ArticleFollowController@MyFollow');
 	Route::get('myresume', 'ResumeController@MyResume');
@@ -86,3 +86,8 @@ Route::get('book', 'BookController@List');
 Route::get('book/{id}', 'BookController@Detail');
 Route::get('competition', 'CompetitionController@List');
 
+// 学院
+Route::get('college', 'CollegeController@List');
+Route::get('college/{id}', 'CollegeController@Detail');
+Route::get('college/{id}/courses', 'CollegeController@Courses');
+Route::get('college/{id}/teachers', 'CollegeController@Teachers');

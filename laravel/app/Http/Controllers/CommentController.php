@@ -22,7 +22,7 @@ class CommentController extends Controller
         $comment = new Comment();
         $return = new _Return();
 
-        $user = Auth::user();
+        $user =Auth::guard('api')->user();
 
         if(!isset($request['content'])){
             return $return->error(500, 10001);

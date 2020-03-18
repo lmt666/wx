@@ -10,7 +10,7 @@ class Book extends Model
     public $timestamps = false;
 
     public function list(){
-    	$data = Book::get()->toArray();
+    	$data = Book::paginate(10)->toArray();
 
     	return $data;
     }

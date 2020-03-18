@@ -14,7 +14,7 @@ class ResumeController extends Controller
     	$resume = new Resume();
     	$return = new _Return();
 
-    	$user = Auth::user();
+    	$user = Auth::guard('api')->user();
 
     	if(!isset($request['name']) || !isset($request['birth']) || !isset($request['sex']) || !isset($request['major']) || !isset($request['university']) || !isset($request['self-description'])){
     		return $return->error(500, 10001);
@@ -33,7 +33,7 @@ class ResumeController extends Controller
     	$resume = new Resume();
     	$return = new _Return();
 
-    	$user = Auth::user();
+    	$user = Auth::guard('api')->user();
 
     	if(!isset($request['name']) || !isset($request['birth']) || !isset($request['sex']) || !isset($request['major']) || !isset($request['university']) || !isset($request['self-description'])){
     		return $return->error(500, 10001);
@@ -52,7 +52,7 @@ class ResumeController extends Controller
     	$resume = new Resume();
     	$return = new _Return();
 
-    	$user = Auth::user();
+    	$user = Auth::guard('api')->user();
 
     	$data = $resume->myresume($user['id']);
 

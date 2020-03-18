@@ -36,7 +36,7 @@ class ArticleController extends Controller
         $article = new Article();
         $return = new _Return();
 
-        $user = Auth::user();
+        $user = Auth::guard('api')->user();
 
         if(!isset($request['title']) || !isset($request['content']) || !isset($request['type'])){
             return $return->error(500, 10001);

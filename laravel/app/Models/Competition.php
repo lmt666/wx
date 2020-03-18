@@ -10,7 +10,7 @@ class Competition extends Model
     public $timestamps = false;
 
     public function list(){
-    	$data = Competition::get()->toArray();
+    	$data = Competition::paginate(10)->toArray();
 
     	return $data;
     }

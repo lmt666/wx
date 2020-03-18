@@ -10,7 +10,7 @@ class College extends Model
     public $timestamps = false;
 
     public function list(){
-    	$data = College::get()->toArray();
+    	$data = College::paginate(10)->toArray();
 
     	return $data;
     }
@@ -22,13 +22,13 @@ class College extends Model
     }
 
     public function courses($college_id){
-    	$data = Course::where('college_id', $college_id)->get()->toArray();
+    	$data = Course::where('college_id', $college_id)->paginate(10)->toArray();
 
     	return $data;
     }
     
     public function teachers($college_id){
-    	$data = Teacher::where('college_id', $college_id)->get()->toArray();
+    	$data = Teacher::where('college_id', $college_id)->paginate(10)->toArray();
 
     	return $data;
     }
