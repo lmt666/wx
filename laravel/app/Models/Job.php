@@ -30,14 +30,36 @@ class Job extends Model
     }
     // 按工作地点筛选
     public function place($place){
-         $data = Job::whereIn('place', $place)->orderBy('id', 'desc')->paginate(10)->toArray();
-
+        $i = 0;
+        foreach ($place as $place) {
+            $query[$i] = DB::table('jobs')->where('place', 'like', '%' . $place . '%');
+            $i++;
+        }
+        
+        $data = $query[0];
+        for($i = 0; isset(($query[$i+1])); $i++){
+            $data = $data->union($query[$i+1]);
+        }
+        $query = $data->toSql();
+        $data = DB::table(DB::raw("($query) as a"))->mergeBindings($data)->orderBy('id','desc')->paginate(10)->toArray(); 
+    
         return $data;
     }
     // 按工作类别和工作地点筛选
     public function category_place($category, $place){
-         $data = Job::whereIn('category', $category)->whereIn('place', $place)->orderBy('id', 'desc')->paginate(10)->toArray();
-
+        $i = 0;
+        foreach ($place as $place) {
+            $query[$i] = DB::table('jobs')->whereIn('category', $category)->where('place', 'like', '%' . $place . '%');
+            $i++;
+        }
+        
+        $data = $query[0];
+        for($i = 0; isset(($query[$i+1])); $i++){
+            $data = $data->union($query[$i+1]);
+        }
+        $query = $data->toSql();
+        $data = DB::table(DB::raw("($query) as a"))->mergeBindings($data)->orderBy('id','desc')->paginate(10)->toArray(); 
+    
         return $data;
     }
 
@@ -54,7 +76,7 @@ class Job extends Model
     }
 
     public function books($job_id){
-        $data = DB::table('jobs_books')->where('job_id', $job_id)->leftJoin('books', 'jobs_books.book_id', 'books.id')->selectRaw('jobs_books.id, book_id, name, pic, author, translator, press')->paginate(10)->toArray();
+        $data = DB::table('jobs_books')->where('job_id', $job_id)->leftJoin('books', 'jobs_books.book_id', 'books.id')->selectRaw('jobs_books.id, book_id, title, pic, author, press, date, category_1, category_2, summary')->paginate(10)->toArray();
 
         return $data;
     }
